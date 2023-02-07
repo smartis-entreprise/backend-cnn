@@ -1,0 +1,13 @@
+# Python files and virtual environment
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+*.egg
+venv/
+
+# Docker files
+docker-compose.yml
+.dockerignore
+docker-build/
