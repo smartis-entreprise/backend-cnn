@@ -1,19 +1,20 @@
-# Use a base image with tensorflow and python3
+# Définir l'image de base
 FROM tensorflow/tensorflow:latest
 
-# Set the working directory
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copy the requirements file
+# Copier les fichiers requis dans le répertoire de travail
 COPY requirements.txt .
+COPY app ./app
+COPY model ./model
+COPY image.jpg .
 
-# Install the required packages
+# Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN apt-get update && apt-get install -y libgl1-mesa-glx
+# Définir les variables d'environnement
+ENV PYTHONUNBUFFERED=1
 
-# Copy the code into the container
-COPY . .
-
-# Command to run when the container starts
-CMD ["python", "app.py"]
+# Définir le point d'entrée
+ENTRYPOINT ["python", "./app/main.py"]
